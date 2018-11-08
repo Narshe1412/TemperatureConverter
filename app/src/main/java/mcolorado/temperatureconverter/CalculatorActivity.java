@@ -1,5 +1,6 @@
 package mcolorado.temperatureconverter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -107,7 +108,27 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     private void convertAndSend(double tempValue) {
-        int selectedId = fromGroup.getCheckedRadioButtonId();
-
+        int selectedFromId = fromGroup.getCheckedRadioButtonId();
+        int selectedToId = toGroup.getCheckedRadioButtonId();
+        if (selectedFromId == fromCelsius.getId() && selectedToId == toFarenheit.getId()) {
+            tempResult = calc.celsiusToFarehnheit(tempValue);
+        } else if (selectedFromId == fromCelsius.getId() && selectedToId == toKelvin.getId()) {
+            tempResult = calc.celsiusToKelvin(tempValue);
+        } else if (selectedFromId == fromKelvin.getId() && selectedToId == toFarenheit.getId()) {
+            tempResult = calc.kelvinToFarenheit(tempValue);
+        } else if (selectedFromId == fromKelvin.getId() && selectedToId == toCelsius.getId()) {
+            tempResult = calc.kelvinToCelsius(tempValue);
+        } else if (selectedFromId == fromFarenheit.getId() && selectedToId == toKelvin.getId()) {
+            tempResult = calc.farenheitToKelvin(tempValue);
+        } else if (selectedFromId == fromFarenheit.getId() && selectedToId == toCelsius.getId()) {
+            tempResult = calc.farenheitToCelsius(tempValue);
+        } else {
+            Toast.makeText(CalculatorActivity.this, "Unable to calculate the conversion.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("result", tempResult);
+        startActivity(i);
     }
 }

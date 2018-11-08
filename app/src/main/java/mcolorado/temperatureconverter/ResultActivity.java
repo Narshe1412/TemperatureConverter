@@ -6,8 +6,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
+
+    TextView txtResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +18,8 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        txtResult = findViewById(R.id.txtResult);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -25,6 +30,18 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String value = extras.getDouble("result") + "";
+            txtResult.setText(value);
+        }
+    }
 }
