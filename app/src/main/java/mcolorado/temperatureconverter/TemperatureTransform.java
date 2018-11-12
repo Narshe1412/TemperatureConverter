@@ -2,6 +2,10 @@ package mcolorado.temperatureconverter;
 
 public class TemperatureTransform {
 
+    public static final String CELSIUS_UNIT = "C";
+    public static final String KELVIN_UNIT = "K";
+    public static final String FARENHEIT_UNIT = "F";
+
     public double farenheitToCelsius(double degreesInF) {
         return (degreesInF - 32) * 5 / 9;
     }

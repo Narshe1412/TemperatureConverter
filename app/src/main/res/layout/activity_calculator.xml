@@ -26,7 +26,7 @@
       android:id="@+id/tvInstructions"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Please enter the temperature you want to convert and select the unit:"
+      android:text="@string/instructions"
       android:textAlignment="center"
       android:textSize="18sp"/>
     <EditText
@@ -51,19 +51,19 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Farenheit (F°)"/>
+          android:text="@string/farenheit"/>
         <RadioButton
           android:id="@+id/radioCelsiusFrom"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Celsius (C°)"/>
+          android:text="@string/celsius"/>
         <RadioButton
           android:id="@+id/radioKelvinFrom"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Kelvin (K°)"/>
+          android:text="@string/kelvin"/>
       </RadioGroup>
       <RadioGroup
         android:id="@+id/grpOptionsTo"
@@ -75,19 +75,19 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Farenheit (F°)"/>
+          android:text="@string/farenheit"/>
         <RadioButton
           android:id="@+id/radioCelsiusTo"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Celsius (C°)"/>
+          android:text="@string/celsius"/>
         <RadioButton
           android:id="@+id/radioKelvinTo"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Kelvin (K°)"/>
+          android:text="@string/kelvin"/>
       </RadioGroup>
 
     </LinearLayout>
@@ -96,6 +96,6 @@
       android:layout_width="fill_parent"
       android:layout_height="98dp"
       android:layout_weight="50"
-      android:text="Convert"/>
+      android:text="@string/convertBtn"/>
   </LinearLayout>
 </android.support.constraint.ConstraintLayout>

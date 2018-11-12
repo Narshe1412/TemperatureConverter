@@ -14,16 +14,16 @@
     android:gravity="center"
     android:orientation="vertical">
     <TextView
-      android:id="@+id/textView"
+      android:id="@+id/tvGratz"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="CONGRATULATIONS!"
+      android:text="@string/gratz"
       android:textAlignment="center"/>
     <TextView
-      android:id="@+id/textView2"
+      android:id="@+id/tvResultMessage"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Your result is:"
+      android:text="@string/your_result_is"
       android:textAlignment="center"/>
     <TextView
       android:id="@+id/txtResult"
@@ -33,12 +33,13 @@
       />
   </LinearLayout>
   <android.support.design.widget.AppBarLayout
+    android:id="@+id/widgetOverlay"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay">
 
     <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbar"
+      android:id="@+id/widgetToolbar"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:background="?attr/colorPrimary"
@@ -49,7 +50,7 @@
   <include layout="@layout/content_result"/>
 
   <android.support.design.widget.FloatingActionButton
-    android:id="@+id/fab"
+    android:id="@+id/floatingBtn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/fab_margin"

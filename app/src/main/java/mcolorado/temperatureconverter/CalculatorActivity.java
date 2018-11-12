@@ -108,20 +108,27 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     private void convertAndSend(double tempValue) {
+        String unit = "";
         int selectedFromId = fromGroup.getCheckedRadioButtonId();
         int selectedToId = toGroup.getCheckedRadioButtonId();
         if (selectedFromId == fromCelsius.getId() && selectedToId == toFarenheit.getId()) {
             tempResult = calc.celsiusToFarehnheit(tempValue);
+            unit = calc.FARENHEIT_UNIT;
         } else if (selectedFromId == fromCelsius.getId() && selectedToId == toKelvin.getId()) {
             tempResult = calc.celsiusToKelvin(tempValue);
+            unit = calc.KELVIN_UNIT;
         } else if (selectedFromId == fromKelvin.getId() && selectedToId == toFarenheit.getId()) {
             tempResult = calc.kelvinToFarenheit(tempValue);
+            unit =  calc.FARENHEIT_UNIT;
         } else if (selectedFromId == fromKelvin.getId() && selectedToId == toCelsius.getId()) {
             tempResult = calc.kelvinToCelsius(tempValue);
+            unit = calc.CELSIUS_UNIT;
         } else if (selectedFromId == fromFarenheit.getId() && selectedToId == toKelvin.getId()) {
             tempResult = calc.farenheitToKelvin(tempValue);
+            unit = calc.KELVIN_UNIT;
         } else if (selectedFromId == fromFarenheit.getId() && selectedToId == toCelsius.getId()) {
             tempResult = calc.farenheitToCelsius(tempValue);
+            unit = calc.CELSIUS_UNIT;
         } else {
             Toast.makeText(CalculatorActivity.this, "Unable to calculate the conversion.",
                     Toast.LENGTH_SHORT).show();
@@ -129,6 +136,14 @@ public class CalculatorActivity extends AppCompatActivity {
         }
         Intent i = new Intent(this, ResultActivity.class);
         i.putExtra("result", tempResult);
+        i.putExtra("unit", unit);
         startActivity(i);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // TODO
     }
 }

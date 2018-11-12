@@ -1,5 +1,6 @@
 package mcolorado.temperatureconverter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 public class ResultActivity extends AppCompatActivity {
 
     TextView txtResult;
+    FloatingActionButton fab;
+    String resultText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +24,20 @@ public class ResultActivity extends AppCompatActivity {
 
         txtResult = findViewById(R.id.txtResult);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(Intent.ACTION_SENDTO);
+                i.putExtra(Intent.EXTRA_SUBJECT, "Your Temperature Conversion Result");
+                i.putExtra(Intent.EXTRA_TEXT, resultText);
+
+                if(i.resolveActivity(getPackageManager()) != null) {
+                    startActivity(i);
+                }
             }
         });
+        fab.setEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -40,8 +49,16 @@ public class ResultActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String value = extras.getDouble("result") + "";
-            txtResult.setText(value);
+            resultText = extras.getDouble("result") + " °" + extras.getString("unit");
+            txtResult.setText(resultText);
+            fab.setEnabled(true);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // TODO
     }
 }
