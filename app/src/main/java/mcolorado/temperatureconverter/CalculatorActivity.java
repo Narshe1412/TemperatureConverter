@@ -12,6 +12,9 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
+/**
+ * Activity to gather the inputs from the user
+ */
 public class CalculatorActivity extends AppCompatActivity {
 
     private Button convertBtn;
@@ -27,11 +30,15 @@ public class CalculatorActivity extends AppCompatActivity {
     private RadioButton toCelsius;
     private RadioButton toKelvin;
 
+    /**
+     * Activity lyfecicle onCreate method
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
+        // Get the UI elements
         inputText = findViewById(R.id.txtTempInput);
         convertBtn = findViewById(R.id.convertBtn);
         fromGroup = findViewById(R.id.grpOptionsFrom);
@@ -43,17 +50,31 @@ public class CalculatorActivity extends AppCompatActivity {
         toCelsius = findViewById(R.id.radioCelsiusTo);
         toKelvin = findViewById(R.id.radioKelvinTo);
 
+        // Initializes calculation result
         tempResult = 0;
+        // Load calculator class
         calc = new TemperatureTransform();
 
+        // Add onClick listener to the Convert button
         convertBtn.setOnClickListener(new OnClickListener() {
+            /**
+             * Calls the handler method to perform the conversion
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 handleClick();
             }
         });
 
+        // Add onCheckedChange listener to the radio button to disable mirror elements so a
+        // conversion from unit X to unit X cannot happen
         fromGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            /**
+             * Disable mirror element when one is clicked. Enable the rest.
+             * @param group The group of radio buttons that is affected
+             * @param checkedId The id of the element that was clicked
+             */
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 toFarenheit.setEnabled(true);
@@ -72,7 +93,14 @@ public class CalculatorActivity extends AppCompatActivity {
             }
         });
 
+        // Add onCheckedChange listener to the radio button to disable mirror elements so a
+        // conversion from unit X to unit X cannot happen
         toGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            /**
+             * Disable mirror element when one is clicked. Enable the rest.
+             * @param group The group of radio buttons that is affected
+             * @param checkedId The id of the element that was clicked
+             */
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 fromFarenheit.setEnabled(true);
@@ -92,12 +120,17 @@ public class CalculatorActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Handles Convert click button event
+     */
     private void handleClick() {
+        // Verify the input box is not empty
         if (inputText.getText().equals("")) {
             Toast.makeText(CalculatorActivity.this, "You need to input a value to convert.",
                     Toast.LENGTH_SHORT).show();
         }
 
+        // Verifies the input box is numeric
         try {
             double tempValue = Double.parseDouble(String.valueOf(inputText.getText()));
             convertAndSend(tempValue);
@@ -107,10 +140,17 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Attempts to perform a temperature conversion and load the next activity
+     *
+     * @param tempValue A Double that stores the temperature value to convert
+     */
     private void convertAndSend(double tempValue) {
         String unit = "";
         int selectedFromId = fromGroup.getCheckedRadioButtonId();
         int selectedToId = toGroup.getCheckedRadioButtonId();
+
+        // If--then cases to make sure we call the appropriate method on each conversion
         if (selectedFromId == fromCelsius.getId() && selectedToId == toFarenheit.getId()) {
             tempResult = calc.celsiusToFarehnheit(tempValue);
             unit = calc.FARENHEIT_UNIT;
@@ -119,7 +159,7 @@ public class CalculatorActivity extends AppCompatActivity {
             unit = calc.KELVIN_UNIT;
         } else if (selectedFromId == fromKelvin.getId() && selectedToId == toFarenheit.getId()) {
             tempResult = calc.kelvinToFarenheit(tempValue);
-            unit =  calc.FARENHEIT_UNIT;
+            unit = calc.FARENHEIT_UNIT;
         } else if (selectedFromId == fromKelvin.getId() && selectedToId == toCelsius.getId()) {
             tempResult = calc.kelvinToCelsius(tempValue);
             unit = calc.CELSIUS_UNIT;
@@ -130,16 +170,23 @@ public class CalculatorActivity extends AppCompatActivity {
             tempResult = calc.farenheitToCelsius(tempValue);
             unit = calc.CELSIUS_UNIT;
         } else {
+            // Fallback in case of unknown error when performing the conversion
             Toast.makeText(CalculatorActivity.this, "Unable to calculate the conversion.",
                     Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // Call the new activity to display the result
         Intent i = new Intent(this, ResultActivity.class);
+        // Pass the parameters we need in the second activity
         i.putExtra("result", tempResult);
         i.putExtra("unit", unit);
         startActivity(i);
     }
 
+    /**
+     * Activity lifeclycle onSaveInstanceState method
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
