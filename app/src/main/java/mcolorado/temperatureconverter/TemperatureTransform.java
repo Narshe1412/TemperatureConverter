@@ -6,10 +6,16 @@ package mcolorado.temperatureconverter;
 public class TemperatureTransform {
 
     /**
-     * Constants that identify the text for each unit
+     * String that identifies the unit for Celsius degrees
      */
     public static final String CELSIUS_UNIT = "C";
+    /**
+     * String that identifies the unit for Kelvin degrees
+     */
     public static final String KELVIN_UNIT = "K";
+    /**
+     * String that identifies the unit for Farenheit degrees
+     */
     public static final String FARENHEIT_UNIT = "F";
 
     /**
