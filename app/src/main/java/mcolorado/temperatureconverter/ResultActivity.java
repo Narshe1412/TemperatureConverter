@@ -97,12 +97,24 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     /**
-     * Activity lifecycle method
+     * Activity lifecycle method onSaveInstanceState
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        // TODO
+        outState.putString("result", resultText);
+        outState.putBoolean("fabactive", fab.isEnabled());
+    }
+
+    /**
+     * Activity lifecycle method onRestoreInstanceState
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        resultText = savedInstanceState.getString("result");
+        fab.setEnabled(savedInstanceState.getBoolean("fabactive"));
     }
 }

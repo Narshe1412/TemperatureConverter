@@ -191,6 +191,16 @@ public class CalculatorActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        // TODO
+        outState.putString("temperatureInput", inputText.getText()+"");
+    }
+
+    /**
+     * Activity lifeclycle onRestoreInstanceState method
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        inputText.setText(savedInstanceState.getString("temperatureInput"));
     }
 }
