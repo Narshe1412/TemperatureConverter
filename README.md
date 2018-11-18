@@ -27,3 +27,15 @@ Design and implement an App that converts between different Temperature units an
 ## Documentation
 
 A Javadoc file can be found in this same repository under ~/docs. It's also published online at [https://narshe1412.github.io/TemperatureConverter/](https://narshe1412.github.io/TemperatureConverter/)
+
+## Screenshots
+
+![App info](https://narshe1412.github.io/TemperatureConverter/docs/screenshots/appinfo.png)
+
+![Main Screen](https://narshe1412.github.io/TemperatureConverter/docs/screenshots/workingapp.png)
+
+![Result Screen](https://narshe1412.github.io/TemperatureConverter/docs/screenshots/results.png)
+
+![Error Notification Toast](https://narshe1412.github.io/TemperatureConverter/docs/screenshots/notification.png)
+
+![Send Mail Functionality](https://narshe1412.github.io/TemperatureConverter/docs/screenshots/implicitintent.png)
