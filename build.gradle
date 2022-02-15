@@ -1,4 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+  id "org.sonarqube" version "3.3"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "Narshe1412_TemperatureConverter"
+    property "sonar.organization", "narshe1412-github"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
 
 buildscript {
     
